@@ -177,8 +177,25 @@
     </div>
 
     <script>
+        const nav = document.querySelector('#main');
+        const topOfNav = nav.offsetTop;//Расстояние от верха до элемента nav
 
+        function fixNav() {
+            //сколько всего проскролено:
+            // console.log(topOfNav, window.scrollY);
+            if (window.scrollY >= topOfNav) {
+                //что бы не было скачка страницы при смене раположения nav
+                //добавляем такой же высоты padding
+                document.body.style.paddingTop = nav.offsetHeight + 'px';
+                document.body.classList.add('fixed-nav');
+            } else {
+                //убираем padding когда возвращаем элемент
+                document.body.style.paddingTop = 0;
+                document.body.classList.remove('fixed-nav');
+            }
+        }
 
+        window.addEventListener('scroll', fixNav);
     </script>
 
 </body>
